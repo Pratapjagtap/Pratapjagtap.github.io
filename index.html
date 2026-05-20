@@ -1,100 +1,454 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Portfolio</title>
-    <!-- Links to your external CSS file -->
-    <link rel="stylesheet" href="style.css">
-    <!-- Font Awesome for Icons (Optional, loaded via CDN) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALEX.MORGAN — DEV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="nav-content">
-            <div class="logo">&lt;DevName /&gt;</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <button id="theme-toggle" aria-label="Toggle Dark Mode">
-                <i class="fas fa-moon"></i>
-            </button>
+<!-- SCANLINE OVERLAY -->
+<div class="scanlines" aria-hidden="true"></div>
+<!-- CURSOR -->
+<div class="cur-dot" id="curDot"></div>
+<div class="cur-ring" id="curRing"></div>
+<!-- CURSOR TEXT -->
+<div class="cur-text" id="curText"></div>
+
+<!-- LOADING SCREEN -->
+<div class="loader" id="loader">
+  <div class="loader-inner">
+    <div class="loader-bar-wrap"><div class="loader-bar" id="loaderBar"></div></div>
+    <p class="loader-label" id="loaderLabel">INITIALIZING_</p>
+  </div>
+</div>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" id="nav">
+  <a href="#hero" class="nav-logo">AM<span>.</span>DEV</a>
+  <div class="nav-center" id="navCenter">
+    <a href="#work" class="nav-item" data-label="[WORK]">[WORK]</a>
+    <a href="#about" class="nav-item" data-label="[ABOUT]">[ABOUT]</a>
+    <a href="#stack" class="nav-item" data-label="[STACK]">[STACK]</a>
+    <a href="#timeline" class="nav-item" data-label="[TIMELINE]">[TIMELINE]</a>
+    <a href="#contact" class="nav-item" data-label="[CONTACT]">[CONTACT]</a>
+  </div>
+  <div class="nav-right">
+    <button class="nav-cmd" id="cmdBtn" data-cursor="SEARCH">⌘K</button>
+    <button class="nav-theme" id="themeBtn" data-cursor="THEME">◐</button>
+    <button class="nav-ham" id="hamBtn" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#work" class="mm-link">[WORK]</a>
+  <a href="#about" class="mm-link">[ABOUT]</a>
+  <a href="#stack" class="mm-link">[STACK]</a>
+  <a href="#timeline" class="mm-link">[TIMELINE]</a>
+  <a href="#contact" class="mm-link">[CONTACT]</a>
+</div>
+
+<!-- ===== CMD PALETTE ===== -->
+<div class="cmd-bg" id="cmdBg">
+  <div class="cmd-panel">
+    <div class="cmd-header">
+      <span class="cmd-prompt">$_</span>
+      <input type="text" id="cmdInput" class="cmd-inp" placeholder="type command..." autocomplete="off" spellcheck="false">
+      <kbd class="cmd-esc">ESC</kbd>
+    </div>
+    <ul class="cmd-list" id="cmdList"></ul>
+    <div class="cmd-foot">
+      <span>↑↓ navigate</span><span>↵ execute</span><span>esc close</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section id="hero" class="hero">
+  <div class="hero-grid-overlay" aria-hidden="true"></div>
+
+  <div class="hero-top-bar">
+    <span class="htb-item blink">● REC</span>
+    <span class="htb-item" id="liveClock"></span>
+    <span class="htb-item">NYC, USA</span>
+    <span class="htb-item avail">◉ OPEN FOR WORK</span>
+  </div>
+
+  <div class="hero-main">
+    <div class="hero-kicker">FULL-STACK DEVELOPER / DESIGNER</div>
+    <h1 class="hero-title">
+      <span class="ht-line" data-delay="0">BUILDING</span>
+      <span class="ht-line italic" data-delay="80">digital</span>
+      <span class="ht-line" data-delay="160">THINGS</span>
+      <span class="ht-line accent-line" data-delay="240">THAT HIT.</span>
+    </h1>
+    <div class="hero-desc-row">
+      <p class="hero-desc">I architect fast, accessible, and brutally honest interfaces — no fluff, no filler. Just sharp code and stronger ideas.</p>
+      <div class="hero-ctas">
+        <a href="#work" class="btn-brut" data-cursor="EXPLORE">VIEW WORK →</a>
+        <a href="#contact" class="btn-brut ghost" data-cursor="TALK">HIT ME UP</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-stats-bar">
+    <div class="hsb-item">
+      <span class="hsb-num" data-count="47">00</span>
+      <span class="hsb-label">PROJECTS SHIPPED</span>
+    </div>
+    <div class="hsb-sep"></div>
+    <div class="hsb-item">
+      <span class="hsb-num" data-count="5">0</span>
+      <span class="hsb-label">YRS EXPERIENCE</span>
+    </div>
+    <div class="hsb-sep"></div>
+    <div class="hsb-item">
+      <span class="hsb-num" data-count="18">0</span>
+      <span class="hsb-label">HAPPY CLIENTS</span>
+    </div>
+    <div class="hsb-sep"></div>
+    <div class="hsb-item">
+      <span class="hsb-num" data-count="99">0</span>
+      <span class="hsb-label">% COFFEE FUELED</span>
+    </div>
+  </div>
+
+  <div class="hero-scroll-hint" aria-hidden="true">
+    <span>SCROLL</span>
+    <div class="scroll-arrow">↓</div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker">
+    <span>REACT</span><span class="tx">✕</span>
+    <span>NEXT.JS</span><span class="tx">✕</span>
+    <span>NODE.JS</span><span class="tx">✕</span>
+    <span>TYPESCRIPT</span><span class="tx">✕</span>
+    <span>POSTGRESQL</span><span class="tx">✕</span>
+    <span>DOCKER</span><span class="tx">✕</span>
+    <span>FIGMA</span><span class="tx">✕</span>
+    <span>AWS</span><span class="tx">✕</span>
+    <span>GRAPHQL</span><span class="tx">✕</span>
+    <span>REACT</span><span class="tx">✕</span>
+    <span>NEXT.JS</span><span class="tx">✕</span>
+    <span>NODE.JS</span><span class="tx">✕</span>
+    <span>TYPESCRIPT</span><span class="tx">✕</span>
+    <span>POSTGRESQL</span><span class="tx">✕</span>
+    <span>DOCKER</span><span class="tx">✕</span>
+    <span>FIGMA</span><span class="tx">✕</span>
+    <span>AWS</span><span class="tx">✕</span>
+    <span>GRAPHQL</span><span class="tx">✕</span>
+  </div>
+</div>
+
+<!-- ===== WORK ===== -->
+<section id="work" class="section">
+  <div class="wrap">
+    <div class="sec-label reveal">// SELECTED_WORK</div>
+    <h2 class="sec-heading reveal">PROJECTS<br><em>I'M PROUD OF.</em></h2>
+
+    <div class="project-grid">
+
+      <article class="proj-card reveal" data-cursor="VIEW">
+        <div class="proj-num">01</div>
+        <div class="proj-img" style="--c1:#ff4040;--c2:#1a0a0a">
+          <div class="proj-img-inner">
+            <span class="pi-label">DASHBOARD</span>
+            <div class="pi-shapes">
+              <div class="pi-bar" style="height:60%;left:10%"></div>
+              <div class="pi-bar" style="height:85%;left:28%"></div>
+              <div class="pi-bar" style="height:40%;left:46%"></div>
+              <div class="pi-bar" style="height:70%;left:64%"></div>
+              <div class="pi-bar" style="height:95%;left:82%"></div>
+            </div>
+          </div>
         </div>
-    </nav>
+        <div class="proj-body">
+          <h3 class="proj-title">E-COMMERCE DASHBOARD</h3>
+          <p class="proj-desc">Analytics platform with real-time data viz, role-based access control, and automated reporting for a distributed team.</p>
+          <div class="proj-tags">
+            <span>REACT</span><span>CHART.JS</span><span>FIREBASE</span><span>STRIPE</span>
+          </div>
+          <div class="proj-foot">
+            <a href="#" class="proj-link" data-cursor="OPEN">LIVE ↗</a>
+            <a href="#" class="proj-link" data-cursor="CODE">CODE ↗</a>
+          </div>
+        </div>
+      </article>
 
-    <main>
-        <section id="home" class="hero fade-in">
-            <h1 class="hero-title">Hi, I'm <span class="highlight">Your Name</span></h1>
-            <p class="hero-subtitle">A Full-Stack Developer creating modern web experiences.</p>
-            <div class="hero-buttons">
-                <a href="#projects" class="btn btn-primary">View Work</a>
-                <a href="https://github.com/yourusername" target="_blank" class="btn btn-outline"><i class="fab fa-github"></i> GitHub</a>
+      <article class="proj-card reveal" data-cursor="VIEW">
+        <div class="proj-num">02</div>
+        <div class="proj-img" style="--c1:#00c8ff;--c2:#001a20">
+          <div class="proj-img-inner">
+            <span class="pi-label">WEATHER APP</span>
+            <div class="pi-weather">
+              <div class="pi-sun">☀</div>
+              <div class="pi-clouds">⛅ ⛅</div>
             </div>
-        </section>
+          </div>
+        </div>
+        <div class="proj-body">
+          <h3 class="proj-title">WEATHER APPLICATION</h3>
+          <p class="proj-desc">Mobile-first PWA with location-based forecasts, animated weather states, and offline caching via service workers.</p>
+          <div class="proj-tags">
+            <span>VANILLA JS</span><span>REST API</span><span>PWA</span><span>CSS GRID</span>
+          </div>
+          <div class="proj-foot">
+            <a href="#" class="proj-link" data-cursor="OPEN">LIVE ↗</a>
+            <a href="#" class="proj-link" data-cursor="CODE">CODE ↗</a>
+          </div>
+        </div>
+      </article>
 
-        <section id="skills" class="fade-in">
-            <h2 class="section-title">Tech Stack</h2>
-            <div class="skills-container">
-                <span class="skill-tag">HTML5</span>
-                <span class="skill-tag">CSS3</span>
-                <span class="skill-tag">JavaScript (ES6+)</span>
-                <span class="skill-tag">React</span>
-                <span class="skill-tag">Node.js</span>
-                <span class="skill-tag">Git/GitHub</span>
+      <article class="proj-card reveal" data-cursor="VIEW">
+        <div class="proj-num">03</div>
+        <div class="proj-img" style="--c1:#a855f7;--c2:#0d001a">
+          <div class="proj-img-inner">
+            <span class="pi-label">AI TOOL</span>
+            <div class="pi-ai">
+              <div class="pi-dot"></div><div class="pi-dot"></div><div class="pi-dot"></div>
             </div>
-        </section>
+          </div>
+        </div>
+        <div class="proj-body">
+          <h3 class="proj-title">AI WRITING ASSISTANT</h3>
+          <p class="proj-desc">Chrome extension that embeds GPT-4 into any text field, with tone profiles and cross-device writing history sync.</p>
+          <div class="proj-tags">
+            <span>TYPESCRIPT</span><span>OPENAI API</span><span>CHROME EXT</span>
+          </div>
+          <div class="proj-foot">
+            <a href="#" class="proj-link" data-cursor="OPEN">LIVE ↗</a>
+            <a href="#" class="proj-link" data-cursor="CODE">CODE ↗</a>
+          </div>
+        </div>
+      </article>
 
-        <section id="projects" class="fade-in">
-            <h2 class="section-title">Featured Projects</h2>
-            <div class="project-grid">
-                
-                <article class="project-card">
-                    <div class="project-content">
-                        <h3>E-Commerce Dashboard</h3>
-                        <p>A full-stack analytics dashboard with real-time data visualization and user management.</p>
-                        <div class="project-tech">
-                            <span>React</span><span>Chart.js</span><span>Firebase</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-                            <a href="#"><i class="fab fa-github"></i> Code</a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="project-card">
-                    <div class="project-content">
-                        <h3>Weather Application</h3>
-                        <p>A mobile-first weather app that fetches data from the OpenWeather API.</p>
-                        <div class="project-tech">
-                            <span>JavaScript</span><span>REST API</span><span>CSS Grid</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-                            <a href="#"><i class="fab fa-github"></i> Code</a>
-                        </div>
-                    </div>
-                </article>
-
+      <article class="proj-card reveal" data-cursor="VIEW">
+        <div class="proj-num">04</div>
+        <div class="proj-img" style="--c1:#f59e0b;--c2:#1a1000">
+          <div class="proj-img-inner">
+            <span class="pi-label">FINANCE</span>
+            <div class="pi-finance">
+              <div class="pi-line"></div>
             </div>
-        </section>
+          </div>
+        </div>
+        <div class="proj-body">
+          <h3 class="proj-title">FINTECH TRACKER</h3>
+          <p class="proj-desc">Personal finance dashboard with ML-driven spending categorization, budget forecasting, and bank API integrations.</p>
+          <div class="proj-tags">
+            <span>NEXT.JS</span><span>PRISMA</span><span>PLAID API</span>
+          </div>
+          <div class="proj-foot">
+            <a href="#" class="proj-link" data-cursor="OPEN">LIVE ↗</a>
+            <a href="#" class="proj-link" data-cursor="CODE">CODE ↗</a>
+          </div>
+        </div>
+      </article>
 
-        <section id="contact" class="fade-in">
-            <h2 class="section-title">Get In Touch</h2>
-            <p class="contact-text">Currently looking for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!</p>
-            <a href="mailto:hello@example.com" class="btn btn-primary">Say Hello</a>
-        </section>
-    </main>
+    </div>
+  </div>
+</section>
 
-    <footer>
-        <p>Built from scratch by Your Name &copy; 2026</p>
-    </footer>
+<!-- ===== ABOUT ===== -->
+<section id="about" class="section about-section">
+  <div class="wrap about-wrap">
+    <div class="about-left reveal">
+      <div class="sec-label">// ABOUT_ME</div>
+      <h2 class="sec-heading">WHO<br><em>THE HELL</em><br>AM I?</h2>
+      <p class="about-body">I'm Alex — a full-stack developer who treats code like craft. I don't build things that are just functional. I build things that are <strong>felt.</strong></p>
+      <p class="about-body">5 years in, 47 projects deep. I've worked with startups, agencies, and solo founders. The constant? Obsessive attention to detail and zero tolerance for mediocre UX.</p>
+      <div class="about-facts">
+        <div class="fact-item"><span class="fact-key">LOCATION</span><span class="fact-val">New York City, USA</span></div>
+        <div class="fact-item"><span class="fact-key">STATUS</span><span class="fact-val avail">◉ AVAILABLE</span></div>
+        <div class="fact-item"><span class="fact-key">TIMEZONE</span><span class="fact-val">EST (UTC-5)</span></div>
+        <div class="fact-item"><span class="fact-key">COFFEE</span><span class="fact-val">3x daily, black</span></div>
+      </div>
+      <a href="#" class="btn-brut" data-cursor="DOWNLOAD">DOWNLOAD CV ↓</a>
+    </div>
+    <div class="about-right reveal">
+      <div class="now-playing-card">
+        <div class="np-header"><span class="np-tag">// CURRENT_STATUS</span><span class="np-live blink">● LIVE</span></div>
+        <ul class="np-list">
+          <li><span class="np-icon">▶</span> Shipping a SaaS dashboard</li>
+          <li><span class="np-icon">▶</span> Reading "Designing Data-Intensive Apps"</li>
+          <li><span class="np-icon">▶</span> Listening to — Khruangbin</li>
+          <li><span class="np-icon">▶</span> Writing on CSS architecture</li>
+          <li><span class="np-icon">▶</span> Breaking things in Next.js 15</li>
+        </ul>
+      </div>
 
-    <!-- Links to your external JS file -->
-    <script src="script.js"></script>
+      <div class="testimonial-carousel" id="testimonials">
+        <div class="tc-header"><span class="sec-label">// TESTIMONIALS</span></div>
+        <div class="tc-slides">
+          <div class="tc-slide active">
+            <p class="tc-quote">"Alex delivered a product that felt 10x better than what we spec'd. Rare to find someone who pushes back on bad ideas and still ships fast."</p>
+            <div class="tc-author"><span class="tca-name">SARA K.</span><span class="tca-role">CEO, Luminary Labs</span></div>
+          </div>
+          <div class="tc-slide">
+            <p class="tc-quote">"Brutally honest feedback + impeccable execution. The dashboard he built cut our ops time in half. Would hire again in a heartbeat."</p>
+            <div class="tc-author"><span class="tca-name">JAMES T.</span><span class="tca-role">CTO, Stackform</span></div>
+          </div>
+          <div class="tc-slide">
+            <p class="tc-quote">"Best developer I've worked with. He cares about the product as much as you do — maybe more. That's not common."</p>
+            <div class="tc-author"><span class="tca-name">NINA R.</span><span class="tca-role">Founder, Typeshift</span></div>
+          </div>
+        </div>
+        <div class="tc-dots" id="tcDots"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STACK ===== -->
+<section id="stack" class="section">
+  <div class="wrap">
+    <div class="sec-label reveal">// TECH_STACK</div>
+    <h2 class="sec-heading reveal">WEAPONS<br><em>OF CHOICE.</em></h2>
+
+    <div class="stack-grid reveal">
+      <div class="stack-col">
+        <div class="stack-col-label">FRONTEND</div>
+        <div class="stack-row" data-pct="92"><span>REACT / NEXT.JS</span><div class="sbar"><div class="sbar-fill"></div></div><span class="sbar-pct">92%</span></div>
+        <div class="stack-row" data-pct="88"><span>TYPESCRIPT</span><div class="sbar"><div class="sbar-fill"></div></div><span class="sbar-pct">88%</span></div>
+        <div class="stack-row" data-pct="95"><span>CSS / ANIMATIONS</span><div class="sbar"><div class="sbar-fill"></div></div><span class="sbar-pct">95%</span></div>
+        <div class="stack-row" data-pct="78"><span>FIGMA / DESIGN</span><div class="sbar"><div class="sbar-fill"></div></div><span class="sbar-pct">78%</span></div>
+        <div class="stack-row" data-pct="82"><span>TAILWIND CSS</span><div class="sbar"><div class="sbar-fill"></div></div><span class="sbar-pct">82%</span></div>
+      </div>
+      <div class="stack-col">
+        <div class="stack-col-label">BACKEND / INFRA</div>
+        <div class="stack-row" data-pct="90"><span>NODE.JS / EXPRESS</span><div class="sbar"><div class="sbar-fill"></div></div><span class="sbar-pct">90%</span></div>
+        <div class="stack-row" data-pct="84"><span>POSTGRESQL</span><div class="sbar"><div class="sbar-fill"></div></div><span class="sbar-pct">84%</span></div>
+        <div class="stack-row" data-pct="76"><span>GRAPHQL</span><div class="sbar"><div class="sbar-fill"></div></div><span class="sbar-pct">76%</span></div>
+        <div class="stack-row" data-pct="70"><span>DOCKER / AWS</span><div class="sbar"><div class="sbar-fill"></div></div><span class="sbar-pct">70%</span></div>
+        <div class="stack-row" data-pct="80"><span>PRISMA / DRIZZLE</span><div class="sbar"><div class="sbar-fill"></div></div><span class="sbar-pct">80%</span></div>
+      </div>
+    </div>
+
+    <div class="badge-cloud reveal">
+      <span class="badge">GIT</span><span class="badge">GITHUB ACTIONS</span><span class="badge">JEST</span><span class="badge">VITEST</span>
+      <span class="badge hi">NEXT.JS</span><span class="badge">REDIS</span><span class="badge">SUPABASE</span>
+      <span class="badge">VERCEL</span><span class="badge hi">REACT</span><span class="badge">STORYBOOK</span>
+      <span class="badge">FRAMER MOTION</span><span class="badge">ZUSTAND</span><span class="badge hi">NODE.JS</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TIMELINE ===== -->
+<section id="timeline" class="section">
+  <div class="wrap">
+    <div class="sec-label reveal">// CAREER_LOG</div>
+    <h2 class="sec-heading reveal">THE<br><em>JOURNEY.</em></h2>
+    <div class="tl-container reveal">
+      <div class="tl-line"></div>
+      <div class="tl-item tl-right">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <span class="tl-year">2026</span>
+          <h3 class="tl-title">SENIOR DEVELOPER</h3>
+          <p class="tl-company">APEX DIGITAL — NYC</p>
+          <p class="tl-desc">Lead developer on 3 enterprise SaaS products. Architecting micro-frontend systems and mentoring junior engineers.</p>
+        </div>
+      </div>
+      <div class="tl-item tl-left">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <span class="tl-year">2024</span>
+          <h3 class="tl-title">FREELANCE DEVELOPER</h3>
+          <p class="tl-company">SELF-EMPLOYED</p>
+          <p class="tl-desc">Worked with 12+ startups across fintech, healthtech, and creative industries. Shipped 18 projects in 18 months.</p>
+        </div>
+      </div>
+      <div class="tl-item tl-right">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <span class="tl-year">2022</span>
+          <h3 class="tl-title">FRONTEND DEVELOPER</h3>
+          <p class="tl-company">MOTION LAB — REMOTE</p>
+          <p class="tl-desc">Built animation-heavy marketing sites and interactive data dashboards. Performance obsessed from day one.</p>
+        </div>
+      </div>
+      <div class="tl-item tl-left">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <span class="tl-year">2021</span>
+          <h3 class="tl-title">JUNIOR DEVELOPER</h3>
+          <p class="tl-company">SEEDLAB STUDIO — BROOKLYN</p>
+          <p class="tl-desc">First real job. Learned fast, broke everything, fixed it faster. Shipped 9 client projects in year one.</p>
+        </div>
+      </div>
+      <div class="tl-item tl-right">
+        <div class="tl-dot tl-dot-start"></div>
+        <div class="tl-card tl-card-start">
+          <span class="tl-year">2020</span>
+          <h3 class="tl-title">COMPUTER SCIENCE B.S.</h3>
+          <p class="tl-company">NYU TANDON</p>
+          <p class="tl-desc">Graduated. Immediately started building things that had nothing to do with my coursework.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact" class="section contact-section">
+  <div class="wrap contact-wrap">
+    <div class="contact-left reveal">
+      <div class="sec-label">// GET_IN_TOUCH</div>
+      <h2 class="sec-heading">GOT A<br><em>PROJECT?</em><br>LET'S GO.</h2>
+      <p class="contact-sub">I'm open to freelance work, full-time roles, and projects worth losing sleep over. If that's you — send it.</p>
+      <a href="mailto:hello@alexmorgan.dev" class="email-link" data-cursor="MAILTO">hello@alexmorgan.dev →</a>
+      <div class="socials">
+        <a href="#" class="soc-link" data-cursor="GH">GH</a>
+        <a href="#" class="soc-link" data-cursor="LI">LI</a>
+        <a href="#" class="soc-link" data-cursor="TW">TW</a>
+        <a href="#" class="soc-link" data-cursor="DR">DR</a>
+      </div>
+    </div>
+    <form class="contact-form reveal" id="cForm" novalidate>
+      <div class="cf-row">
+        <div class="cf-field">
+          <label for="cName">YOUR_NAME</label>
+          <input type="text" id="cName" placeholder="Jane Smith" autocomplete="off">
+        </div>
+        <div class="cf-field">
+          <label for="cEmail">YOUR_EMAIL</label>
+          <input type="email" id="cEmail" placeholder="jane@example.com">
+        </div>
+      </div>
+      <div class="cf-field">
+        <label for="cSubject">SUBJECT</label>
+        <input type="text" id="cSubject" placeholder="Let's build something rad">
+      </div>
+      <div class="cf-field">
+        <label for="cMsg">MESSAGE</label>
+        <textarea id="cMsg" rows="6" placeholder="Tell me everything. Don't hold back."></textarea>
+      </div>
+      <div class="cf-foot">
+        <button type="submit" class="btn-brut submit-btn" id="submitBtn" data-cursor="SEND">SEND IT →</button>
+        <p class="cf-success" id="cfSuccess">// MESSAGE RECEIVED. I'LL HIT YOU BACK SOON.</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="wrap footer-wrap">
+    <span class="footer-logo">AM<span>.</span>DEV</span>
+    <span class="footer-copy">DESIGNED &amp; BUILT BY ALEX MORGAN — 2026</span>
+    <button class="footer-top" id="backTop" data-cursor="TOP">↑ TOP</button>
+  </div>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
