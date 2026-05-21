@@ -3,254 +3,231 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PRATAP JAGTAP — DEV</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<title>PRATAP JAGTAP // DEVELOPER</title>
 <link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400&family=Archivo+Black&family=Lora:ital@1&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<!-- SCANLINE OVERLAY -->
+<!-- Scanline overlay -->
 <div class="scanlines" aria-hidden="true"></div>
-<!-- CURSOR -->
-<div class="cur-dot" id="curDot"></div>
-<div class="cur-ring" id="curRing"></div>
-<!-- CURSOR TEXT -->
-<div class="cur-text" id="curText"></div>
 
-<!-- LOADING SCREEN -->
+<!-- Custom cursor -->
+<div class="cursor-box" id="cursorBox">+</div>
+
+<!-- GLITCH LOADER -->
 <div class="loader" id="loader">
-  <div class="loader-inner">
-    <div class="loader-bar-wrap"><div class="loader-bar" id="loaderBar"></div></div>
-    <p class="loader-label" id="loaderLabel">INITIALIZING_</p>
+  <div class="loader-text" id="loaderText">LOADING_PORTFOLIO.EXE</div>
+  <div class="loader-bar-wrap"><div class="loader-bar" id="loaderBar"></div></div>
+  <div class="loader-sub" id="loaderSub">INITIALIZING MODULES...</div>
+</div>
+
+<!-- CMD PALETTE -->
+<div class="cmd-overlay" id="cmdOverlay">
+  <div class="cmd-box">
+    <div class="cmd-header">[ COMMAND_INTERFACE_v2.1 ]</div>
+    <div class="cmd-search-row">
+      <span class="cmd-prompt">$&gt;</span>
+      <input type="text" id="cmdInput" class="cmd-input" placeholder="TYPE COMMAND..." autocomplete="off" spellcheck="false">
+    </div>
+    <ul class="cmd-results" id="cmdResults"></ul>
+    <div class="cmd-footer">
+      <span>[↑↓] NAVIGATE</span>
+      <span>[↵] EXECUTE</span>
+      <span>[ESC] ABORT</span>
+    </div>
   </div>
 </div>
 
-<!-- ===== NAV ===== -->
-<nav class="nav" id="nav">
-  <a href="#hero" class="nav-logo">AM<span>.</span>DEV</a>
-  <div class="nav-center" id="navCenter">
-    <a href="#work" class="nav-item" data-label="[WORK]">[WORK]</a>
-    <a href="#about" class="nav-item" data-label="[ABOUT]">[ABOUT]</a>
-    <a href="#stack" class="nav-item" data-label="[STACK]">[STACK]</a>
-    <a href="#timeline" class="nav-item" data-label="[TIMELINE]">[TIMELINE]</a>
-    <a href="#contact" class="nav-item" data-label="[CONTACT]">[CONTACT]</a>
+<!-- NAV -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <span class="logo-bracket">[</span>AM<span class="logo-bracket">]</span>
+    </div>
+    <div class="nav-links">
+      <a href="#work" class="nav-link">_WORK</a>
+      <a href="#about" class="nav-link">_ABOUT</a>
+      <a href="#skills" class="nav-link">_STACK</a>
+      <a href="#testimonials" class="nav-link">_REVIEWS</a>
+      <a href="#contact" class="nav-link">_CONTACT</a>
+    </div>
+    <div class="nav-controls">
+      <button class="ctrl-btn" id="cmdTrigger" title="Command palette (Ctrl+K)">⌘K</button>
+      <button class="ctrl-btn" id="glitchBtn" title="Glitch mode">◈</button>
+      <button class="ctrl-btn" id="themeToggle" title="Toggle theme">◐</button>
+    </div>
   </div>
-  <div class="nav-right">
-    <button class="nav-cmd" id="cmdBtn" data-cursor="SEARCH">⌘K</button>
-    <button class="nav-theme" id="themeBtn" data-cursor="THEME">◐</button>
-    <button class="nav-ham" id="hamBtn" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+  <div class="nav-ticker">
+    <span class="ticker-track" id="tickerTrack">
+      AVAILABLE FOR HIRE &nbsp;// &nbsp;FULL STACK DEV &nbsp;// &nbsp;NYC BASED &nbsp;// &nbsp;OPEN TO REMOTE &nbsp;// &nbsp;5 YRS EXP &nbsp;// &nbsp;47 PROJECTS &nbsp;// &nbsp;AVAILABLE FOR HIRE &nbsp;// &nbsp;FULL STACK DEV &nbsp;// &nbsp;NYC BASED &nbsp;// &nbsp;OPEN TO REMOTE &nbsp;// &nbsp;5 YRS EXP &nbsp;// &nbsp;47 PROJECTS &nbsp;// &nbsp;
+    </span>
   </div>
 </nav>
 
-<!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#work" class="mm-link">[WORK]</a>
-  <a href="#about" class="mm-link">[ABOUT]</a>
-  <a href="#stack" class="mm-link">[STACK]</a>
-  <a href="#timeline" class="mm-link">[TIMELINE]</a>
-  <a href="#contact" class="mm-link">[CONTACT]</a>
-</div>
-
-<!-- ===== CMD PALETTE ===== -->
-<div class="cmd-bg" id="cmdBg">
-  <div class="cmd-panel">
-    <div class="cmd-header">
-      <span class="cmd-prompt">$_</span>
-      <input type="text" id="cmdInput" class="cmd-inp" placeholder="type command..." autocomplete="off" spellcheck="false">
-      <kbd class="cmd-esc">ESC</kbd>
-    </div>
-    <ul class="cmd-list" id="cmdList"></ul>
-    <div class="cmd-foot">
-      <span>↑↓ navigate</span><span>↵ execute</span><span>esc close</span>
-    </div>
-  </div>
-</div>
-
-<!-- ===== HERO ===== -->
-<section id="hero" class="hero">
-  <div class="hero-grid-overlay" aria-hidden="true"></div>
-
-  <div class="hero-top-bar">
-    <span class="htb-item blink">● REC</span>
-    <span class="htb-item" id="liveClock"></span>
-    <span class="htb-item">NYC, USA</span>
-    <span class="htb-item avail">◉ OPEN FOR WORK</span>
-  </div>
-
+<!-- HERO -->
+<section id="home" class="hero">
+  <div class="hero-stamp">EST. 2019</div>
+  <div class="hero-issue">ISSUE №001</div>
   <div class="hero-main">
-    <div class="hero-kicker">FULL-STACK DEVELOPER / DESIGNER</div>
-    <h1 class="hero-title">
-      <span class="ht-line" data-delay="0">BUILDING</span>
-      <span class="ht-line italic" data-delay="80">digital</span>
-      <span class="ht-line" data-delay="160">THINGS</span>
-      <span class="ht-line accent-line" data-delay="240">THAT HIT.</span>
-    </h1>
-    <div class="hero-desc-row">
-      <p class="hero-desc">I architect fast, accessible, and brutally honest interfaces — no fluff, no filler. Just sharp code and stronger ideas.</p>
-      <div class="hero-ctas">
-        <a href="#work" class="btn-brut" data-cursor="EXPLORE">VIEW WORK →</a>
-        <a href="#contact" class="btn-brut ghost" data-cursor="TALK">HIT ME UP</a>
+    <div class="hero-left">
+      <p class="hero-eyebrow">FULL-STACK DEVELOPER</p>
+      <h1 class="hero-heading">
+        <span class="glitch-text" data-text="ALEX">ALEX</span><br>
+        <span class="glitch-text italic-serif" data-text="MORGAN">MORGAN</span>
+      </h1>
+      <div class="hero-tagline">
+        <span class="bracket-label">[ </span>crafting interfaces that<br>don't suck since 2019<span class="bracket-label"> ]</span>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-box-stack">
+        <div class="hero-info-box">
+          <div class="info-label">STATUS</div>
+          <div class="info-val green-text">● AVAILABLE</div>
+        </div>
+        <div class="hero-info-box">
+          <div class="info-label">LOCATION</div>
+          <div class="info-val">NEW YORK, USA</div>
+        </div>
+        <div class="hero-info-box">
+          <div class="info-label">SPECIALTY</div>
+          <div class="info-val">WEB / APPS / APIs</div>
+        </div>
+        <div class="hero-info-box">
+          <div class="info-label">RATE</div>
+          <div class="info-val">LET'S TALK</div>
+        </div>
       </div>
     </div>
   </div>
-
-  <div class="hero-stats-bar">
-    <div class="hsb-item">
-      <span class="hsb-num" data-count="47">00</span>
-      <span class="hsb-label">PROJECTS SHIPPED</span>
-    </div>
-    <div class="hsb-sep"></div>
-    <div class="hsb-item">
-      <span class="hsb-num" data-count="5">0</span>
-      <span class="hsb-label">YRS EXPERIENCE</span>
-    </div>
-    <div class="hsb-sep"></div>
-    <div class="hsb-item">
-      <span class="hsb-num" data-count="18">0</span>
-      <span class="hsb-label">HAPPY CLIENTS</span>
-    </div>
-    <div class="hsb-sep"></div>
-    <div class="hsb-item">
-      <span class="hsb-num" data-count="99">0</span>
-      <span class="hsb-label">% COFFEE FUELED</span>
+  <div class="hero-cta-row">
+    <a href="#work" class="btn-brutal">[ VIEW WORK →]</a>
+    <a href="#contact" class="btn-brutal btn-invert">[ HIRE ME →]</a>
+    <div class="hero-stat-row">
+      <div class="mini-stat"><span class="mini-num" data-count="47">0</span><span class="mini-label">PROJECTS</span></div>
+      <div class="mini-sep">//</div>
+      <div class="mini-stat"><span class="mini-num" data-count="5">0</span><span class="mini-label">YRS EXP</span></div>
+      <div class="mini-sep">//</div>
+      <div class="mini-stat"><span class="mini-num" data-count="18">0</span><span class="mini-label">CLIENTS</span></div>
     </div>
   </div>
-
-  <div class="hero-scroll-hint" aria-hidden="true">
-    <span>SCROLL</span>
-    <div class="scroll-arrow">↓</div>
+  <div class="hero-scroll-bar">
+    <span>SCROLL DOWN</span>
+    <div class="scroll-progress-line"><div class="scroll-progress-fill" id="scrollFill"></div></div>
   </div>
 </section>
 
 <!-- MARQUEE -->
-<div class="ticker-wrap" aria-hidden="true">
-  <div class="ticker">
-    <span>REACT</span><span class="tx">✕</span>
-    <span>NEXT.JS</span><span class="tx">✕</span>
-    <span>NODE.JS</span><span class="tx">✕</span>
-    <span>TYPESCRIPT</span><span class="tx">✕</span>
-    <span>POSTGRESQL</span><span class="tx">✕</span>
-    <span>DOCKER</span><span class="tx">✕</span>
-    <span>FIGMA</span><span class="tx">✕</span>
-    <span>AWS</span><span class="tx">✕</span>
-    <span>GRAPHQL</span><span class="tx">✕</span>
-    <span>REACT</span><span class="tx">✕</span>
-    <span>NEXT.JS</span><span class="tx">✕</span>
-    <span>NODE.JS</span><span class="tx">✕</span>
-    <span>TYPESCRIPT</span><span class="tx">✕</span>
-    <span>POSTGRESQL</span><span class="tx">✕</span>
-    <span>DOCKER</span><span class="tx">✕</span>
-    <span>FIGMA</span><span class="tx">✕</span>
-    <span>AWS</span><span class="tx">✕</span>
-    <span>GRAPHQL</span><span class="tx">✕</span>
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span>REACT ★</span><span>TYPESCRIPT ★</span><span>NODE.JS ★</span><span>NEXT.JS ★</span><span>POSTGRESQL ★</span><span>DOCKER ★</span><span>AWS ★</span><span>GRAPHQL ★</span><span>FIGMA ★</span><span>PYTHON ★</span>
+    <span>REACT ★</span><span>TYPESCRIPT ★</span><span>NODE.JS ★</span><span>NEXT.JS ★</span><span>POSTGRESQL ★</span><span>DOCKER ★</span><span>AWS ★</span><span>GRAPHQL ★</span><span>FIGMA ★</span><span>PYTHON ★</span>
   </div>
 </div>
 
-<!-- ===== WORK ===== -->
+<!-- WORK -->
 <section id="work" class="section">
-  <div class="wrap">
-    <div class="sec-label reveal">// SELECTED_WORK</div>
-    <h2 class="sec-heading reveal">PROJECTS<br><em>I'M PROUD OF.</em></h2>
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <div class="section-num">01</div>
+      <h2 class="section-title">SELECTED<br>WORK_</h2>
+      <div class="section-rule"></div>
+    </div>
 
-    <div class="project-grid">
+    <div class="project-grid fade-in">
 
-      <article class="proj-card reveal" data-cursor="VIEW">
-        <div class="proj-num">01</div>
-        <div class="proj-img" style="--c1:#ff4040;--c2:#1a0a0a">
-          <div class="proj-img-inner">
-            <span class="pi-label">DASHBOARD</span>
-            <div class="pi-shapes">
-              <div class="pi-bar" style="height:60%;left:10%"></div>
-              <div class="pi-bar" style="height:85%;left:28%"></div>
-              <div class="pi-bar" style="height:40%;left:46%"></div>
-              <div class="pi-bar" style="height:70%;left:64%"></div>
-              <div class="pi-bar" style="height:95%;left:82%"></div>
-            </div>
+      <article class="project-card project-card--big">
+        <div class="project-card-top">
+          <span class="project-num-tag">P.001</span>
+          <div class="project-live-tag">LIVE ●</div>
+        </div>
+        <div class="project-visual" style="--c1:#FF4400;--c2:#FF8800;">
+          <div class="project-visual-inner">
+            <div class="pv-bar" style="width:80%;top:20%"></div>
+            <div class="pv-bar" style="width:55%;top:38%"></div>
+            <div class="pv-bar" style="width:92%;top:56%"></div>
+            <div class="pv-bar" style="width:40%;top:74%"></div>
+            <div class="pv-label">DASHBOARD</div>
           </div>
         </div>
-        <div class="proj-body">
-          <h3 class="proj-title">E-COMMERCE DASHBOARD</h3>
-          <p class="proj-desc">Analytics platform with real-time data viz, role-based access control, and automated reporting for a distributed team.</p>
-          <div class="proj-tags">
-            <span>REACT</span><span>CHART.JS</span><span>FIREBASE</span><span>STRIPE</span>
-          </div>
-          <div class="proj-foot">
-            <a href="#" class="proj-link" data-cursor="OPEN">LIVE ↗</a>
-            <a href="#" class="proj-link" data-cursor="CODE">CODE ↗</a>
-          </div>
+        <h3 class="project-title">E-COMMERCE<br>DASHBOARD</h3>
+        <p class="project-desc">Full-stack analytics platform. Real-time data viz, role-based access, Stripe webhooks, automated PDF reports. Built for a 12-person retail team.</p>
+        <div class="project-tech-row">
+          <span>REACT</span><span>CHART.JS</span><span>FIREBASE</span><span>STRIPE</span>
+        </div>
+        <div class="project-links-row">
+          <a href="#" class="proj-btn">LIVE ↗</a>
+          <a href="#" class="proj-btn proj-btn--outline">CODE ↗</a>
         </div>
       </article>
 
-      <article class="proj-card reveal" data-cursor="VIEW">
-        <div class="proj-num">02</div>
-        <div class="proj-img" style="--c1:#00c8ff;--c2:#001a20">
-          <div class="proj-img-inner">
-            <span class="pi-label">WEATHER APP</span>
-            <div class="pi-weather">
-              <div class="pi-sun">☀</div>
-              <div class="pi-clouds">⛅ ⛅</div>
-            </div>
+      <article class="project-card">
+        <div class="project-card-top">
+          <span class="project-num-tag">P.002</span>
+        </div>
+        <div class="project-visual" style="--c1:#0066FF;--c2:#00CCFF;">
+          <div class="project-visual-inner">
+            <div class="pv-circle" style="width:60px;height:60px;top:20%;left:15%"></div>
+            <div class="pv-circle" style="width:40px;height:40px;top:45%;right:20%"></div>
+            <div class="pv-label">WEATHER</div>
           </div>
         </div>
-        <div class="proj-body">
-          <h3 class="proj-title">WEATHER APPLICATION</h3>
-          <p class="proj-desc">Mobile-first PWA with location-based forecasts, animated weather states, and offline caching via service workers.</p>
-          <div class="proj-tags">
-            <span>VANILLA JS</span><span>REST API</span><span>PWA</span><span>CSS GRID</span>
-          </div>
-          <div class="proj-foot">
-            <a href="#" class="proj-link" data-cursor="OPEN">LIVE ↗</a>
-            <a href="#" class="proj-link" data-cursor="CODE">CODE ↗</a>
-          </div>
+        <h3 class="project-title">WEATHER<br>PWA</h3>
+        <p class="project-desc">Mobile-first PWA. Location forecasts, animated states, service workers for offline use.</p>
+        <div class="project-tech-row">
+          <span>JS</span><span>REST API</span><span>CSS GRID</span>
+        </div>
+        <div class="project-links-row">
+          <a href="#" class="proj-btn">LIVE ↗</a>
+          <a href="#" class="proj-btn proj-btn--outline">CODE ↗</a>
         </div>
       </article>
 
-      <article class="proj-card reveal" data-cursor="VIEW">
-        <div class="proj-num">03</div>
-        <div class="proj-img" style="--c1:#a855f7;--c2:#0d001a">
-          <div class="proj-img-inner">
-            <span class="pi-label">AI TOOL</span>
-            <div class="pi-ai">
-              <div class="pi-dot"></div><div class="pi-dot"></div><div class="pi-dot"></div>
-            </div>
+      <article class="project-card">
+        <div class="project-card-top">
+          <span class="project-num-tag">P.003</span>
+          <div class="project-live-tag">NEW ★</div>
+        </div>
+        <div class="project-visual" style="--c1:#CC00FF;--c2:#FF00AA;">
+          <div class="project-visual-inner">
+            <div class="pv-bar" style="width:90%;top:25%"></div>
+            <div class="pv-bar" style="width:65%;top:45%"></div>
+            <div class="pv-bar" style="width:75%;top:65%"></div>
+            <div class="pv-label">AI TOOL</div>
           </div>
         </div>
-        <div class="proj-body">
-          <h3 class="proj-title">AI WRITING ASSISTANT</h3>
-          <p class="proj-desc">Chrome extension that embeds GPT-4 into any text field, with tone profiles and cross-device writing history sync.</p>
-          <div class="proj-tags">
-            <span>TYPESCRIPT</span><span>OPENAI API</span><span>CHROME EXT</span>
-          </div>
-          <div class="proj-foot">
-            <a href="#" class="proj-link" data-cursor="OPEN">LIVE ↗</a>
-            <a href="#" class="proj-link" data-cursor="CODE">CODE ↗</a>
-          </div>
+        <h3 class="project-title">AI WRITING<br>ASSISTANT</h3>
+        <p class="project-desc">Chrome extension. GPT-4 in any text field. Custom tone profiles, writing history sync.</p>
+        <div class="project-tech-row">
+          <span>TS</span><span>OPENAI</span><span>CHROME EXT</span>
+        </div>
+        <div class="project-links-row">
+          <a href="#" class="proj-btn">LIVE ↗</a>
+          <a href="#" class="proj-btn proj-btn--outline">CODE ↗</a>
         </div>
       </article>
 
-      <article class="proj-card reveal" data-cursor="VIEW">
-        <div class="proj-num">04</div>
-        <div class="proj-img" style="--c1:#f59e0b;--c2:#1a1000">
-          <div class="proj-img-inner">
-            <span class="pi-label">FINANCE</span>
-            <div class="pi-finance">
-              <div class="pi-line"></div>
-            </div>
+      <article class="project-card">
+        <div class="project-card-top">
+          <span class="project-num-tag">P.004</span>
+        </div>
+        <div class="project-visual" style="--c1:#00AA44;--c2:#AAFF00;">
+          <div class="project-visual-inner">
+            <div class="pv-grid-dots"></div>
+            <div class="pv-label">TASK MGR</div>
           </div>
         </div>
-        <div class="proj-body">
-          <h3 class="proj-title">FINTECH TRACKER</h3>
-          <p class="proj-desc">Personal finance dashboard with ML-driven spending categorization, budget forecasting, and bank API integrations.</p>
-          <div class="proj-tags">
-            <span>NEXT.JS</span><span>PRISMA</span><span>PLAID API</span>
-          </div>
-          <div class="proj-foot">
-            <a href="#" class="proj-link" data-cursor="OPEN">LIVE ↗</a>
-            <a href="#" class="proj-link" data-cursor="CODE">CODE ↗</a>
-          </div>
+        <h3 class="project-title">TEAM TASK<br>MANAGER</h3>
+        <p class="project-desc">Kanban-style project manager with drag-and-drop, real-time sync, and Slack integration.</p>
+        <div class="project-tech-row">
+          <span>NEXT.JS</span><span>SUPABASE</span><span>DND</span>
+        </div>
+        <div class="project-links-row">
+          <a href="#" class="proj-btn">LIVE ↗</a>
+          <a href="#" class="proj-btn proj-btn--outline">CODE ↗</a>
         </div>
       </article>
 
@@ -258,194 +235,216 @@
   </div>
 </section>
 
-<!-- ===== ABOUT ===== -->
-<section id="about" class="section about-section">
-  <div class="wrap about-wrap">
-    <div class="about-left reveal">
-      <div class="sec-label">// ABOUT_ME</div>
-      <h2 class="sec-heading">WHO<br><em>THE HELL</em><br>AM I?</h2>
-      <p class="about-body">I'm Alex — a full-stack developer who treats code like craft. I don't build things that are just functional. I build things that are <strong>felt.</strong></p>
-      <p class="about-body">5 years in, 47 projects deep. I've worked with startups, agencies, and solo founders. The constant? Obsessive attention to detail and zero tolerance for mediocre UX.</p>
-      <div class="about-facts">
-        <div class="fact-item"><span class="fact-key">LOCATION</span><span class="fact-val">New York City, USA</span></div>
-        <div class="fact-item"><span class="fact-key">STATUS</span><span class="fact-val avail">◉ AVAILABLE</span></div>
-        <div class="fact-item"><span class="fact-key">TIMEZONE</span><span class="fact-val">EST (UTC-5)</span></div>
-        <div class="fact-item"><span class="fact-key">COFFEE</span><span class="fact-val">3x daily, black</span></div>
-      </div>
-      <a href="#" class="btn-brut" data-cursor="DOWNLOAD">DOWNLOAD CV ↓</a>
+<!-- ABOUT + TIMELINE -->
+<section id="about" class="section section--dark">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <div class="section-num">02</div>
+      <h2 class="section-title">ABOUT<br>ME_</h2>
+      <div class="section-rule"></div>
     </div>
-    <div class="about-right reveal">
-      <div class="now-playing-card">
-        <div class="np-header"><span class="np-tag">// CURRENT_STATUS</span><span class="np-live blink">● LIVE</span></div>
-        <ul class="np-list">
-          <li><span class="np-icon">▶</span> Shipping a SaaS dashboard</li>
-          <li><span class="np-icon">▶</span> Reading "Designing Data-Intensive Apps"</li>
-          <li><span class="np-icon">▶</span> Listening to — Khruangbin</li>
-          <li><span class="np-icon">▶</span> Writing on CSS architecture</li>
-          <li><span class="np-icon">▶</span> Breaking things in Next.js 15</li>
-        </ul>
+    <div class="about-layout fade-in">
+      <div class="about-text-col">
+        <p class="about-body">I'M A FULL-STACK DEVELOPER WHO GIVES A DAMN ABOUT THE CRAFT. I BUILD THINGS THAT ARE FAST, ACCESSIBLE, AND MEMORABLE.</p>
+        <p class="about-body about-body--serif">I believe software is as much about communication as computation — the best interfaces feel inevitable. When I'm not shipping code I'm reading design theory, contributing to open source, or tearing apart a good UI to understand why it works.</p>
+        <div class="about-tags">
+          <span>PROBLEM SOLVER</span>
+          <span>TYPE NERD</span>
+          <span>OSS CONTRIBUTOR</span>
+          <span>COFFEE ADDICT</span>
+          <span>NIGHT OWL</span>
+        </div>
+        <a href="#" class="btn-brutal" style="margin-top:2rem;display:inline-block">[ DOWNLOAD CV ↓]</a>
       </div>
-
-      <div class="testimonial-carousel" id="testimonials">
-        <div class="tc-header"><span class="sec-label">// TESTIMONIALS</span></div>
-        <div class="tc-slides">
-          <div class="tc-slide active">
-            <p class="tc-quote">"Alex delivered a product that felt 10x better than what we spec'd. Rare to find someone who pushes back on bad ideas and still ships fast."</p>
-            <div class="tc-author"><span class="tca-name">SARA K.</span><span class="tca-role">CEO, Luminary Labs</span></div>
+      <div class="timeline-col">
+        <div class="timeline-label">// TIMELINE</div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-year">2024</div>
+            <div class="tl-content">
+              <div class="tl-role">SENIOR DEV — ACME CORP</div>
+              <div class="tl-detail">Led frontend architecture for B2B SaaS platform. 0→1 design system.</div>
+            </div>
           </div>
-          <div class="tc-slide">
-            <p class="tc-quote">"Brutally honest feedback + impeccable execution. The dashboard he built cut our ops time in half. Would hire again in a heartbeat."</p>
-            <div class="tc-author"><span class="tca-name">JAMES T.</span><span class="tca-role">CTO, Stackform</span></div>
+          <div class="tl-item">
+            <div class="tl-year">2022</div>
+            <div class="tl-content">
+              <div class="tl-role">FULL-STACK DEV — STUDIO X</div>
+              <div class="tl-detail">Built client apps across fintech, health, and e-commerce verticals.</div>
+            </div>
           </div>
-          <div class="tc-slide">
-            <p class="tc-quote">"Best developer I've worked with. He cares about the product as much as you do — maybe more. That's not common."</p>
-            <div class="tc-author"><span class="tca-name">NINA R.</span><span class="tca-role">Founder, Typeshift</span></div>
+          <div class="tl-item">
+            <div class="tl-year">2021</div>
+            <div class="tl-content">
+              <div class="tl-role">FRONTEND DEV — AGENCY Y</div>
+              <div class="tl-detail">React SPAs, performance optimization, CMS integrations.</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2019</div>
+            <div class="tl-content">
+              <div class="tl-role">FREELANCE — SELF</div>
+              <div class="tl-detail">Started building for local businesses. First $10k project.</div>
+            </div>
           </div>
         </div>
-        <div class="tc-dots" id="tcDots"></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== STACK ===== -->
-<section id="stack" class="section">
-  <div class="wrap">
-    <div class="sec-label reveal">// TECH_STACK</div>
-    <h2 class="sec-heading reveal">WEAPONS<br><em>OF CHOICE.</em></h2>
-
-    <div class="stack-grid reveal">
-      <div class="stack-col">
-        <div class="stack-col-label">FRONTEND</div>
-        <div class="stack-row" data-pct="92"><span>REACT / NEXT.JS</span><div class="sbar"><div class="sbar-fill"></div></div><span class="sbar-pct">92%</span></div>
-        <div class="stack-row" data-pct="88"><span>TYPESCRIPT</span><div class="sbar"><div class="sbar-fill"></div></div><span class="sbar-pct">88%</span></div>
-        <div class="stack-row" data-pct="95"><span>CSS / ANIMATIONS</span><div class="sbar"><div class="sbar-fill"></div></div><span class="sbar-pct">95%</span></div>
-        <div class="stack-row" data-pct="78"><span>FIGMA / DESIGN</span><div class="sbar"><div class="sbar-fill"></div></div><span class="sbar-pct">78%</span></div>
-        <div class="stack-row" data-pct="82"><span>TAILWIND CSS</span><div class="sbar"><div class="sbar-fill"></div></div><span class="sbar-pct">82%</span></div>
-      </div>
-      <div class="stack-col">
-        <div class="stack-col-label">BACKEND / INFRA</div>
-        <div class="stack-row" data-pct="90"><span>NODE.JS / EXPRESS</span><div class="sbar"><div class="sbar-fill"></div></div><span class="sbar-pct">90%</span></div>
-        <div class="stack-row" data-pct="84"><span>POSTGRESQL</span><div class="sbar"><div class="sbar-fill"></div></div><span class="sbar-pct">84%</span></div>
-        <div class="stack-row" data-pct="76"><span>GRAPHQL</span><div class="sbar"><div class="sbar-fill"></div></div><span class="sbar-pct">76%</span></div>
-        <div class="stack-row" data-pct="70"><span>DOCKER / AWS</span><div class="sbar"><div class="sbar-fill"></div></div><span class="sbar-pct">70%</span></div>
-        <div class="stack-row" data-pct="80"><span>PRISMA / DRIZZLE</span><div class="sbar"><div class="sbar-fill"></div></div><span class="sbar-pct">80%</span></div>
-      </div>
+<!-- SKILLS -->
+<section id="skills" class="section">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <div class="section-num">03</div>
+      <h2 class="section-title">TECH<br>STACK_</h2>
+      <div class="section-rule"></div>
     </div>
-
-    <div class="badge-cloud reveal">
-      <span class="badge">GIT</span><span class="badge">GITHUB ACTIONS</span><span class="badge">JEST</span><span class="badge">VITEST</span>
-      <span class="badge hi">NEXT.JS</span><span class="badge">REDIS</span><span class="badge">SUPABASE</span>
-      <span class="badge">VERCEL</span><span class="badge hi">REACT</span><span class="badge">STORYBOOK</span>
-      <span class="badge">FRAMER MOTION</span><span class="badge">ZUSTAND</span><span class="badge hi">NODE.JS</span>
-    </div>
-  </div>
-</section>
-
-<!-- ===== TIMELINE ===== -->
-<section id="timeline" class="section">
-  <div class="wrap">
-    <div class="sec-label reveal">// CAREER_LOG</div>
-    <h2 class="sec-heading reveal">THE<br><em>JOURNEY.</em></h2>
-    <div class="tl-container reveal">
-      <div class="tl-line"></div>
-      <div class="tl-item tl-right">
-        <div class="tl-dot"></div>
-        <div class="tl-card">
-          <span class="tl-year">2026</span>
-          <h3 class="tl-title">SENIOR DEVELOPER</h3>
-          <p class="tl-company">APEX DIGITAL — NYC</p>
-          <p class="tl-desc">Lead developer on 3 enterprise SaaS products. Architecting micro-frontend systems and mentoring junior engineers.</p>
+    <div class="skills-layout fade-in">
+      <div class="skills-col">
+        <div class="skill-category-label">// FRONTEND</div>
+        <div class="skill-list">
+          <div class="skill-row"><span class="skill-name">REACT / NEXT.JS</span><div class="skill-track"><div class="skill-fill" style="--w:92%"></div></div><span class="skill-pct">92</span></div>
+          <div class="skill-row"><span class="skill-name">TYPESCRIPT</span><div class="skill-track"><div class="skill-fill" style="--w:85%"></div></div><span class="skill-pct">85</span></div>
+          <div class="skill-row"><span class="skill-name">CSS / ANIMATIONS</span><div class="skill-track"><div class="skill-fill" style="--w:90%"></div></div><span class="skill-pct">90</span></div>
+          <div class="skill-row"><span class="skill-name">FIGMA</span><div class="skill-track"><div class="skill-fill" style="--w:75%"></div></div><span class="skill-pct">75</span></div>
         </div>
       </div>
-      <div class="tl-item tl-left">
-        <div class="tl-dot"></div>
-        <div class="tl-card">
-          <span class="tl-year">2024</span>
-          <h3 class="tl-title">FREELANCE DEVELOPER</h3>
-          <p class="tl-company">SELF-EMPLOYED</p>
-          <p class="tl-desc">Worked with 12+ startups across fintech, healthtech, and creative industries. Shipped 18 projects in 18 months.</p>
+      <div class="skills-col">
+        <div class="skill-category-label">// BACKEND</div>
+        <div class="skill-list">
+          <div class="skill-row"><span class="skill-name">NODE / EXPRESS</span><div class="skill-track"><div class="skill-fill" style="--w:88%"></div></div><span class="skill-pct">88</span></div>
+          <div class="skill-row"><span class="skill-name">POSTGRESQL</span><div class="skill-track"><div class="skill-fill" style="--w:80%"></div></div><span class="skill-pct">80</span></div>
+          <div class="skill-row"><span class="skill-name">GRAPHQL</span><div class="skill-track"><div class="skill-fill" style="--w:72%"></div></div><span class="skill-pct">72</span></div>
+          <div class="skill-row"><span class="skill-name">DOCKER / AWS</span><div class="skill-track"><div class="skill-fill" style="--w:68%"></div></div><span class="skill-pct">68</span></div>
         </div>
       </div>
-      <div class="tl-item tl-right">
-        <div class="tl-dot"></div>
-        <div class="tl-card">
-          <span class="tl-year">2022</span>
-          <h3 class="tl-title">FRONTEND DEVELOPER</h3>
-          <p class="tl-company">MOTION LAB — REMOTE</p>
-          <p class="tl-desc">Built animation-heavy marketing sites and interactive data dashboards. Performance obsessed from day one.</p>
-        </div>
-      </div>
-      <div class="tl-item tl-left">
-        <div class="tl-dot"></div>
-        <div class="tl-card">
-          <span class="tl-year">2021</span>
-          <h3 class="tl-title">JUNIOR DEVELOPER</h3>
-          <p class="tl-company">SEEDLAB STUDIO — BROOKLYN</p>
-          <p class="tl-desc">First real job. Learned fast, broke everything, fixed it faster. Shipped 9 client projects in year one.</p>
-        </div>
-      </div>
-      <div class="tl-item tl-right">
-        <div class="tl-dot tl-dot-start"></div>
-        <div class="tl-card tl-card-start">
-          <span class="tl-year">2020</span>
-          <h3 class="tl-title">COMPUTER SCIENCE B.S.</h3>
-          <p class="tl-company">NYU TANDON</p>
-          <p class="tl-desc">Graduated. Immediately started building things that had nothing to do with my coursework.</p>
+      <div class="skills-col">
+        <div class="skill-category-label">// TOOLS</div>
+        <div class="tools-grid">
+          <span class="tool-tag">GIT</span><span class="tool-tag">JEST</span><span class="tool-tag">VITE</span><span class="tool-tag">PRISMA</span><span class="tool-tag">REDIS</span><span class="tool-tag">STRIPE</span><span class="tool-tag">VERCEL</span><span class="tool-tag">LINUX</span><span class="tool-tag">POSTMAN</span><span class="tool-tag">WEBPACK</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== CONTACT ===== -->
-<section id="contact" class="section contact-section">
-  <div class="wrap contact-wrap">
-    <div class="contact-left reveal">
-      <div class="sec-label">// GET_IN_TOUCH</div>
-      <h2 class="sec-heading">GOT A<br><em>PROJECT?</em><br>LET'S GO.</h2>
-      <p class="contact-sub">I'm open to freelance work, full-time roles, and projects worth losing sleep over. If that's you — send it.</p>
-      <a href="mailto:hello@alexmorgan.dev" class="email-link" data-cursor="MAILTO">hello@alexmorgan.dev →</a>
-      <div class="socials">
-        <a href="#" class="soc-link" data-cursor="GH">GH</a>
-        <a href="#" class="soc-link" data-cursor="LI">LI</a>
-        <a href="#" class="soc-link" data-cursor="TW">TW</a>
-        <a href="#" class="soc-link" data-cursor="DR">DR</a>
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="section section--dark">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <div class="section-num">04</div>
+      <h2 class="section-title">CLIENT<br>REVIEWS_</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="testimonials-grid fade-in">
+      <div class="testi-card">
+        <div class="testi-rating">★★★★★</div>
+        <p class="testi-text">"ALEX DELIVERED THE DASHBOARD 2 WEEKS EARLY. THE CODE QUALITY WAS EXCEPTIONAL — WELL-DOCUMENTED AND EASILY MAINTAINABLE."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">SC</div>
+          <div>
+            <div class="testi-name">SARAH CHEN</div>
+            <div class="testi-role">CTO @ DATAFLOW INC.</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card testi-card--accent">
+        <div class="testi-rating">★★★★★</div>
+        <p class="testi-text">"TRANSFORMED OUR CLUNKY MVP INTO A POLISHED PRODUCT. OUR CONVERSION RATE WENT UP 34% IN THE FIRST MONTH."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">MR</div>
+          <div>
+            <div class="testi-name">MARCUS REED</div>
+            <div class="testi-role">FOUNDER @ LAUNCHPAD</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-rating">★★★★★</div>
+        <p class="testi-text">"RARE TO FIND SOMEONE WHO CAN TALK DESIGN WITH THE DESIGNERS AND ARCHITECTURE WITH THE ENGINEERS. ALEX DOES BOTH."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">JP</div>
+          <div>
+            <div class="testi-name">JESS PARK</div>
+            <div class="testi-role">LEAD DESIGNER @ AGENCY X</div>
+          </div>
+        </div>
       </div>
     </div>
-    <form class="contact-form reveal" id="cForm" novalidate>
-      <div class="cf-row">
-        <div class="cf-field">
-          <label for="cName">YOUR_NAME</label>
-          <input type="text" id="cName" placeholder="Jane Smith" autocomplete="off">
-        </div>
-        <div class="cf-field">
-          <label for="cEmail">YOUR_EMAIL</label>
-          <input type="email" id="cEmail" placeholder="jane@example.com">
-        </div>
-      </div>
-      <div class="cf-field">
-        <label for="cSubject">SUBJECT</label>
-        <input type="text" id="cSubject" placeholder="Let's build something rad">
-      </div>
-      <div class="cf-field">
-        <label for="cMsg">MESSAGE</label>
-        <textarea id="cMsg" rows="6" placeholder="Tell me everything. Don't hold back."></textarea>
-      </div>
-      <div class="cf-foot">
-        <button type="submit" class="btn-brut submit-btn" id="submitBtn" data-cursor="SEND">SEND IT →</button>
-        <p class="cf-success" id="cfSuccess">// MESSAGE RECEIVED. I'LL HIT YOU BACK SOON.</p>
-      </div>
-    </form>
   </div>
 </section>
 
-<!-- ===== FOOTER ===== -->
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <div class="section-num">05</div>
+      <h2 class="section-title">LET'S<br>TALK_</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="contact-layout fade-in">
+      <div class="contact-left">
+        <p class="contact-big">GOT A PROJECT?<br><span class="italic-serif accent-text">Let's build it.</span></p>
+        <p class="contact-sub">I'M OPEN TO FREELANCE, FULL-TIME, AND INTERESTING SIDE PROJECTS. IF YOU HAVE SOMETHING IN MIND, DON'T BE SHY.</p>
+        <div class="contact-email-big">
+          <a href="mailto:hello@alexmorgan.dev" class="email-link">hello@alexmorgan.dev</a>
+        </div>
+        <div class="contact-social-row">
+          <a href="#" class="social-box">GH</a>
+          <a href="#" class="social-box">LI</a>
+          <a href="#" class="social-box">TW</a>
+          <a href="#" class="social-box">DR</a>
+        </div>
+      </div>
+      <form class="contact-form" id="contactForm" novalidate>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="fname">// NAME</label>
+            <input type="text" id="fname" name="name" placeholder="Jane Smith">
+          </div>
+          <div class="form-field">
+            <label for="femail">// EMAIL</label>
+            <input type="email" id="femail" name="email" placeholder="jane@co.com">
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="fbudget">// BUDGET RANGE</label>
+          <select id="fbudget" name="budget">
+            <option value="">SELECT...</option>
+            <option>UNDER $5K</option>
+            <option>$5K – $15K</option>
+            <option>$15K – $50K</option>
+            <option>$50K+</option>
+            <option>LET'S DISCUSS</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="fmsg">// MESSAGE</label>
+          <textarea id="fmsg" name="message" rows="5" placeholder="DESCRIBE YOUR PROJECT..."></textarea>
+        </div>
+        <div class="form-bottom-row">
+          <button type="submit" class="btn-brutal form-submit" id="formSubmit">[ SEND IT →]</button>
+          <span class="form-note">// I REPLY WITHIN 24H</span>
+        </div>
+        <div class="form-success" id="formSuccess">✓ MESSAGE RECEIVED. TALK SOON.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer class="site-footer">
-  <div class="wrap footer-wrap">
-    <span class="footer-logo">AM<span>.</span>DEV</span>
-    <span class="footer-copy">DESIGNED &amp; BUILT BY ALEX MORGAN — 2026</span>
-    <button class="footer-top" id="backTop" data-cursor="TOP">↑ TOP</button>
+  <div class="footer-inner">
+    <div class="footer-left">
+      <span class="footer-logo">[AM]</span>
+      <span class="footer-copy">© 2026 ALEX MORGAN. ALL RIGHTS RESERVED.</span>
+    </div>
+    <div class="footer-right">
+      <span class="footer-built">BUILT WITH HTML + CSS + JS. NO FRAMEWORKS HURT.</span>
+      <button class="back-top-btn" id="backTop">↑ TOP</button>
+    </div>
   </div>
 </footer>
 
